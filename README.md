@@ -43,6 +43,7 @@ code should be well structured, suitably commented, have error handling and be t
 
 Example
 **> mvn package** 
+
 **> java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup ** 
 
 **Output: ** 
@@ -62,6 +63,7 @@ Example
  
  
  **Output Response** 
+ 
  SubTotal : 4.40
  Apples - 10% off: 0.10 Bread - 50% off: 0.40
  Total : 3.90

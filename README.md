@@ -55,8 +55,12 @@ Output:
 Integration test
 ***********************************
  AppTest - Integration Test for the Price Basket Application
+ 
+ 
  Run this test to spin the actual spring boot application
  You can see the files are loaded, discount rules are applied, prices are calculated
+ 
+ 
  Output Response
  SubTotal : 4.40
  Apples - 10% off: 0.10 Bread - 50% off: 0.40

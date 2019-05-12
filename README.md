@@ -44,6 +44,9 @@ This is a Spring Boot applicaiton using Java 8 features. The application is buil
 Example
 > mvn package
 > java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup
+
+Output:
+
  SubTotal : 4.40
  Apples - 10% off: 0.10 Bread - 50% off: 0.40
  Total : 3.90

@@ -1,7 +1,7 @@
 # im-price-basket
 Application to calculate the price of items in shopping cart
 
-Overview
+# Overview
 Application to calculate the price of items in shopping cart 
 This repository contains a Spring boot applciation and an integration test along with associated unit tests 
 
@@ -12,7 +12,7 @@ The goods that can be purchased, which are all priced in GBP, are:
   Milk – £1.30 per bottle
   Apples – £1.00 per bag
 
-Current special offers are:
+**  Current special offers are: ** 
   Apples have 10% off their normal price this week
   Buy 2 tins of soup and get a loaf of bread for half price
 
@@ -36,32 +36,32 @@ The code and design should meet these requirements but be sufficiently flexible 
 code should be well structured, suitably commented, have error handling and be tested.
 
 ***********************************
-Implementation details
+# Implementation details
 ***********************************
 
-This is a Spring Boot applicaiton using Java 8 features. The application is built using Maven.
+**  This is a Spring Boot applicaiton using Java 8 features. The application is built using Maven.** 
 
 Example
-> mvn package
-> java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup
+** > mvn package ** 
+** > java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup ** 
 
-Output:
+** Output: ** 
 
  SubTotal : 4.40
  Apples - 10% off: 0.10 Bread - 50% off: 0.40
  Total : 3.90
 
 ***********************************
-Integration test
+# Integration test
 ***********************************
- AppTest - Integration Test for the Price Basket Application
+ **  AppTest - Integration Test for the Price Basket Application ** 
  
  
  Run this test to spin the actual spring boot application
  You can see the files are loaded, discount rules are applied, prices are calculated
  
  
- Output Response
+ ** Output Response ** 
  SubTotal : 4.40
  Apples - 10% off: 0.10 Bread - 50% off: 0.40
  Total : 3.90

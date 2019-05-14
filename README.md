@@ -42,11 +42,11 @@ code should be well structured, suitably commented, have error handling and be t
 **This is a Spring Boot applicaiton using Java 8 features. The application is built using Maven.** 
 
 **How to run this application:**
-**Package the compiled code to distributable format, such as a JAR**
-mvn package 
+- Package the compiled code to distributable format, such as a JAR**
+    mvn package 
 
-**Run the Jar locally**
-java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup ** 
+- Run the Jar locally**
+   java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup ** 
 
 **Output: ** 
 

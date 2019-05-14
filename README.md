@@ -41,30 +41,31 @@ code should be well structured, suitably commented, have error handling and be t
 
 **This is a Spring Boot applicaiton using Java 8 features. The application is built using Maven.** 
 
-Example
-**> mvn package** 
+**How to run this application:**
+**Package the compiled code to distributable format, such as a JAR**
+mvn package 
 
-**> java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup ** 
+**Run the Jar locally**
+java -jar target\im-price-basket-1.0-SNAPSHOT.jar Apples Bread Soup Milk Soup ** 
 
 **Output: ** 
 
- SubTotal : 4.40
- Apples - 10% off: 0.10 Bread - 50% off: 0.40
- Total : 3.90
+ - SubTotal : 4.40
+ - Apples - 10% off: 0.10 Bread - 50% off: 0.40
+ - Total : 3.90
 
 ***********************************
 # Integration test
 ***********************************
  **AppTest - Integration Test for the Price Basket Application ** 
- 
- 
+  
  Run this test to spin the actual spring boot application
  You can see the files are loaded, discount rules are applied, prices are calculated
  
  
  **Output Response** 
  
- SubTotal : 4.40
- Apples - 10% off: 0.10 Bread - 50% off: 0.40
- Total : 3.90
+ - SubTotal : 4.40
+ - Apples - 10% off: 0.10 Bread - 50% off: 0.40
+ - Total : 3.90
  You can also change the input and test the response

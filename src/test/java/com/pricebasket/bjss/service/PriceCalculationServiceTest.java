@@ -12,12 +12,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class PriceCalculationServiceTest {
@@ -33,12 +35,12 @@ public class PriceCalculationServiceTest {
 		priceCalculationService = new PriceCalculationService();
 		cart = new ShoppingCart();
 		items = new ArrayList<>();
-		productItem = new ProductItem("Apples", "2");
+		productItem = new ProductItem("Apples", "1");
 		items.add(productItem);
 		cart.setItems(items);
 		products = new HashMap<>();
 		Product product = new Product("Apples", "2.00");
-		Offer offer = new Offer("apples", "1", "1", "apples", "10", "1");
+		Offer offer = new Offer("Apples", "1", "1", "Apples", "10", "10");
 		product.setDiscountOffers(Arrays.asList(offer));
 		products.put("Apples", product);
 	}
@@ -47,12 +49,22 @@ public class PriceCalculationServiceTest {
 	public void verifyTheApplicableDiscountRulesAreGenerated() throws IOException {
 		List<DiscountRule> discountRules = priceCalculationService.generateApplicableDiscountRules(cart, products);
 		assertNotNull(discountRules);
+		assertEquals(discountRules.get(0).getProductname(), "Apples");
+		assertEquals(discountRules.get(0).getDiscountPercent(), "10");
 	}
 
 	@Test
 	public void verifyTheCalculationPrice() throws IOException {
 		List<DiscountRule> discountRules = priceCalculationService.generateApplicableDiscountRules(cart, products);
 		PriceBasketResponse response = priceCalculationService.calculateTotalPrice(products, cart, discountRules);
+		assertNotNull(discountRules);
+		assertEquals(discountRules.get(0).getProductname(), "Apples");
+		assertEquals(discountRules.get(0).getDiscountPercent(), "10");
 		assertNotNull(response);
+		assertEquals(response.getDiscountsApplied(), "Apples - 10% off: 0.20 ");
+		assertEquals(response.getTotalBeforeDiscount(), new BigDecimal("2.00"));
+		assertEquals(response.getTotalAfterDiscount(), new BigDecimal("1.80"));
+
+
 	}
 }

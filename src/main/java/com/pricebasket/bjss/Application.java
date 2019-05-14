@@ -3,7 +3,7 @@ package com.pricebasket.bjss;
 import com.pricebasket.bjss.model.*;
 import com.pricebasket.bjss.service.IPriceBasketService;
 import com.pricebasket.bjss.service.calculate.IPriceCalculationService;
-import com.pricebasket.bjss.service.load.LoadDataService;
+import com.pricebasket.bjss.service.load.ILoadDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,14 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.*;
 
+/*
+* Spring Boot Application to process shopping cart
+* 1. LoadDataService - Loads the products and offers data from csv files
+* 2. PriceBasketService - Normalizes the input data and creates a valid product from input
+* 3. PriceCalculationService - Generates applicable discounts for each product &
+*    						   Calculates the price based on discounts
+*/
+
 @SpringBootApplication
 @ComponentScan(basePackages = "com.pricebasket.bjss")
 public class Application implements CommandLineRunner {
@@ -23,7 +31,7 @@ public class Application implements CommandLineRunner {
 	IPriceBasketService priceBasketService;
 
 	@Autowired
-	LoadDataService loadDataService;
+	ILoadDataService loadDataService;
 
 	@Autowired
 	IPriceCalculationService priceCalculationService;

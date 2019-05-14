@@ -33,7 +33,7 @@ public class PriceCalculationService implements IPriceCalculationService {
             if (productMap.containsKey(productName)) {
                 Product product = productMap.get(productName);
                 productPrice = productPrice.add(new BigDecimal(product.getProductPrice()).multiply(new BigDecimal(item.getProductQuantity())));
-                discountPrice = discountPrice.add(applyDiscountRules(response, product, discountRules));
+                discountPrice = discountPrice.add(applyDiscountRules(response, product, discountRules, item));
             }
         }
         generatePriceBasketResponse(priceBasketResponse, response, productPrice, discountPrice);
@@ -50,11 +50,15 @@ public class PriceCalculationService implements IPriceCalculationService {
                 if (CollectionUtils.isNotEmpty(product.getDiscountOffers())) {
                     for (Offer offer : product.getDiscountOffers()) {
                         if (item.getProductName().equalsIgnoreCase(offer.getProductName())
+                                && offer.getProductQuantity().equals("1")) {
+                            discountRule.setDiscountPercent(offer.getDiscountProductPrice());
+                            discountRule.setProductname(offer.getDiscountProductName());
+                        }else if (item.getProductName().equalsIgnoreCase(offer.getProductName())
                                 && item.getProductQuantity().equals(offer.getProductQuantity())) {
                             discountRule.setDiscountPercent(offer.getDiscountProductPrice());
                             discountRule.setProductname(offer.getDiscountProductName());
-                            applicableDiscountRules.add(discountRule);
                         }
+                        applicableDiscountRules.add(discountRule);
                     }
                 }
             }
@@ -63,11 +67,12 @@ public class PriceCalculationService implements IPriceCalculationService {
         return applicableDiscountRules;
     }
 
-    private BigDecimal applyDiscountRules(StringBuffer response, Product product, List<DiscountRule> discountRules) {
+    private BigDecimal applyDiscountRules(StringBuffer response, Product product, List<DiscountRule> discountRules, ProductItem item) {
         BigDecimal discountPrice = BigDecimal.ZERO;
         for(DiscountRule rule : discountRules){
             if(rule.getProductname().equalsIgnoreCase(product.getProductName())) {
-                discountPrice = discountPrice.add(calculateDiscountPrice(new BigDecimal(product.getProductPrice()), rule.getDiscountPercent()));
+                discountPrice = discountPrice.add(calculateDiscountPrice(new BigDecimal(product.getProductPrice()).multiply(new BigDecimal(item.getProductQuantity())),
+                        rule.getDiscountPercent()));
                 response.append(product.getProductName())
                         .append(" - ")
                         .append(rule.getDiscountPercent())
@@ -88,7 +93,6 @@ public class PriceCalculationService implements IPriceCalculationService {
             priceBasketResponse.setDiscountsApplied("(No offers available)");
         }else{
             priceBasketResponse.setDiscountsApplied(response.toString());
-
         }
     }
 

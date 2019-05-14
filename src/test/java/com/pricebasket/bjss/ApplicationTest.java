@@ -32,11 +32,25 @@ public class ApplicationTest {
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
-    private String response = "Apples - 10% off: 0.10 Bread - 50% off: 0.40";
+    private String responseForactualTestScenario = "Apples - 10% off: 0.10 Bread - 50% off: 0.40";
+    private String responseForFiveApplesInCart = "Apples - 10% off: 0.50";
+    private String responseForNoDiscountsApplicable = "(No offers available)";
 
     @Test
-    public void integrationTestToRunSpringBootAppWithCmdlineParameters() throws Exception {
+    public void integrationTestToRunSpringBootAppWithActualTestData() throws Exception {
         app.run( "Apples", "Bread", "Soup", "Milk", "Soup");
-        Assert.assertThat(systemOutRule.getLog(), containsString(response));
+        Assert.assertThat(systemOutRule.getLog(), containsString(responseForactualTestScenario));
+    }
+
+    @Test
+    public void integrationTestWithFiveApplesInCart() throws Exception {
+        app.run( "Apples", "Apples", "Apples", "Apples", "Apples");
+        Assert.assertThat(systemOutRule.getLog(), containsString(responseForFiveApplesInCart));
+    }
+
+    @Test
+    public void integrationTestWithNoDiscountsApplicable() throws Exception {
+        app.run( "Milk", "Bread");
+        Assert.assertThat(systemOutRule.getLog(), containsString(responseForNoDiscountsApplicable));
     }
 }
